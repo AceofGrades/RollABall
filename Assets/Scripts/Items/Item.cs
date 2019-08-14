@@ -11,10 +11,14 @@ public class Item : MonoBehaviour
     public int score = 1;
     public ItemCollectEvent onCollect = new ItemCollectEvent();
     
+    public void AddScore()
+    {
+        // Give player a score
+        GameManager.Instance.AddScore(score);
+    }
 
     public void Collect()
     {
-        GameManager.Instance.AddScore(1);
         // Run collect event
         onCollect.Invoke(this);
         // Destroy item

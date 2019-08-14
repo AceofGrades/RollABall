@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed = 10f, jump = 10f;
-    public LayerMask hitLayers;
+    public LayerMask ignoreLayers;
     public float rayDistance = 10f;
     public bool isGrounded = false;
     private Rigidbody rigid;
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Ray groundRay = new Ray(transform.position, Vector3.down);
-        isGrounded = Physics.Raycast(groundRay, rayDistance, hitLayers);
+        isGrounded = Physics.Raycast(groundRay, rayDistance, ~ignoreLayers);
     }
     private void OnTriggerEnter(Collider col)
     {
@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
         {
             Jump();
         }
+
     }
     #endregion
     #region Custom
@@ -51,7 +52,6 @@ public class Player : MonoBehaviour
             rigid.AddForce(Vector3.up * jump, ForceMode.Impulse);
         }
     }
-
     private void Move(float inputH, float inputV)
     {
         Vector3 direction = new Vector3(inputH, 0, inputV);
@@ -62,26 +62,6 @@ public class Player : MonoBehaviour
 
         rigid.AddForce(direction * speed);
     }
-	public bool Shoot()
-	{
-		Ray ray = new Ray(transform.position, Vector3.forward);
-		RaycastHit hit;
-		// Cast a ray forward
-		if (Physics.Raycast(ray, out hit))
-		{
-			// If ray hit an item
-			Item item = hit.collider.GetComponent<Item>();
-			if (item)
-			{
-				// Collect it
-				item.Collect();
-				// Ray hit an item!
-				return true;
-			}
-		}
-		// Ray didnt hit anything
-		return false;
-	}
-	#endregion
+    #endregion
 }
 

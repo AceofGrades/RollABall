@@ -4,6 +4,8 @@ using UnityEngine;
 
 using UnityEngine.SceneManagement;
 
+using NaughtyAttributes;
+
 public class GameManager : MonoBehaviour
 {
     #region Singleton
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
         // ... Play a sound
     }
 
+    [Button("Next Level")]
     public void NextLevel()
     {
         // Get current scene
