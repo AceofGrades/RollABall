@@ -6,13 +6,13 @@ using Mirror;
 
 public class CustomNetworkManager : NetworkManager
 {
-    public override void OnServerConnect(NetworkConnection conn)
-    {
-        base.OnServerConnect(conn);
+    //public override void OnServerConnect(NetworkConnection conn)
+    //{
+    //    base.OnServerConnect(conn);
 
-        // Spawn instance of Enemy onto client
-        GameObject enemyPrefab = spawnPrefabs[0];
-        GameObject enemy = Instantiate(enemyPrefab, new Vector3(0,2,0), Quaternion.identity);
-        NetworkServer.Spawn(enemy);
-    }
+    //    // Spawn instance of Enemy onto client
+    //    GameObject enemyPrefab = spawnPrefabs[0];
+    //    GameObject enemy = Instantiate(enemyPrefab, new Vector3(0,2,0), Quaternion.identity);
+    //    NetworkServer.Spawn(enemy);
+    //}
 }
