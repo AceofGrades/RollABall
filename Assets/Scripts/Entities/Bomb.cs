@@ -23,9 +23,9 @@ public class Bomb : NetworkBehaviour
 
     public IEnumerator Explode()
     {
-        yield return new WaitForSeconds(explodeDelay);
+        yield return new WaitForSeconds(explodeDelay); // Waits for explodeDelay seconds
 
-        CmdExplode(transform.position, explosionRadius);
+        CmdExplode(transform.position, explosionRadius); // Bomb explodes relative to where its position was
     }
 
     [Command]
@@ -34,7 +34,7 @@ public class Bomb : NetworkBehaviour
         Collider[] hits = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (var hit in hits)
         {
-            NetworkServer.Destroy(hit.gameObject);
+            NetworkServer.Destroy(hit.gameObject); // Server shows that bomb is destroyed
         }
     }
 

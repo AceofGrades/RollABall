@@ -18,14 +18,14 @@ public class Player : NetworkBehaviour
     #region Unity Events
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.red; // Sets gizmos colour to red
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * rayDistance);
     }
 
     private void OnDestroy()
     {
-        Destroy(attachedCamera.gameObject);
-        Destroy(attachedVirtualCamera.gameObject);
+        Destroy(attachedCamera.gameObject); // Destroys camera
+        Destroy(attachedVirtualCamera.gameObject); // Destroys virtual camera
     }
     private void Start()
     {
@@ -34,17 +34,15 @@ public class Player : NetworkBehaviour
         attachedCamera.transform.SetParent(null);
         attachedVirtualCamera.SetParent(null);
 
-        if (isLocalPlayer)
+        if (isLocalPlayer) // If local player is there
         {
-            attachedCamera.enabled = true;
-            attachedVirtualCamera.gameObject.SetActive(true);
-            //attachedCamera.rect = new Rect(0f, 0f, 0.5f, 1.0f);
+            attachedCamera.enabled = true; // Camera is enabled
+            attachedVirtualCamera.gameObject.SetActive(true); // Virtual camera is active
         }
         else
         {
-            attachedCamera.enabled = false;
-            attachedVirtualCamera.gameObject.SetActive(false);
-            //attachedCamera.rect = new Rect(0.5f, 0f, 0.5f, 1.0f);
+            attachedCamera.enabled = false; // Camera is disabled
+            attachedVirtualCamera.gameObject.SetActive(false); // Virtual camera is not active
         }
     }
     private void FixedUpdate()
@@ -57,7 +55,7 @@ public class Player : NetworkBehaviour
         Item item = col.GetComponent<Item>();
         if (item)
         {
-            item.Collect();
+            item.Collect(); // Collects item, if the object is labeled as such
         }
     }
     private void Update()
@@ -75,7 +73,7 @@ public class Player : NetworkBehaviour
             Move(inputH, inputV);
             if (Input.GetButtonDown("Jump"))
             {
-                Jump();
+                Jump(); // Player jumps
             }
         }
     }
@@ -84,8 +82,8 @@ public class Player : NetworkBehaviour
     [Command]
     public void CmdSpawnBomb(Vector3 position)
     {
-        GameObject bomb = Instantiate(bombPrefab, position, Quaternion.identity);
-        NetworkServer.Spawn(bomb);
+        GameObject bomb = Instantiate(bombPrefab, position, Quaternion.identity); // Instantiates the bomb gameObject
+        NetworkServer.Spawn(bomb); // Server spawns bomb
     }
     #endregion
     #region Custom
@@ -93,7 +91,7 @@ public class Player : NetworkBehaviour
     {
         if (isGrounded)
         {
-            rigid.AddForce(Vector3.up * jump, ForceMode.Impulse);
+            rigid.AddForce(Vector3.up * jump, ForceMode.Impulse); // Calls for player to Jump ONLY if isGrounded
         }
     }
     private void Move(float inputH, float inputV)

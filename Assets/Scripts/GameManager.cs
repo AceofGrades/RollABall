@@ -20,12 +20,12 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    public int score = 0;
+    public int score = 0; // Scoring system, for items picked up or enemies destroyed
     public ItemManager itemManager;
 
     public void GameOver()
     {
-        print("Game is over!!");
+        print("Game is over!!"); // Prints upon GameOver
     }
 
     public void AddScore(int scoreToAdd)
